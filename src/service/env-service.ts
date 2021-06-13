@@ -6,7 +6,12 @@ export class EnvService {
   public BOT_TOKEN: string;
 
   constructor() {
-    dotenv.config();
+    if (process.env.npm_lifecycle_event == "start:dev") {
+      dotenv.config({ path: "./.env.test" });
+    } else {
+      dotenv.config();
+    }
+
     this.APOD_URL = <string>process.env.BASE_URL + <string>process.env.API_KEY;
     this.URL_RANDOM =
       <string>process.env.BASE_URL + <string>process.env.API_KEY + "&count=1";

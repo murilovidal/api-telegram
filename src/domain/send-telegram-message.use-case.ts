@@ -35,7 +35,6 @@ export class SendTelegramMessage {
       }
       await this.sendTextToUser(user, apod.explanation);
     } catch (e) {
-      await this.sendTextToUser(user, BotMessage.FailedToSendApod);
       console.error(e);
     }
   }

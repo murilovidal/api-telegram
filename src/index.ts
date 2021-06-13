@@ -2,14 +2,11 @@ import { getConnection } from "typeorm";
 import { BotService } from "./service/bot.service";
 import { EnvService } from "./service/env-service";
 import { TelegramPresentation } from "./web/telegram-presentation";
-import dotenv from "dotenv";
 import { DbConnectionHelper } from "./helper/db-connection-helper";
-dotenv.config();
 
 const envService = new EnvService();
-const telegramPresentation = new TelegramPresentation(
-  new BotService(envService)
-);
+const botService = new BotService(envService);
+const telegramPresentation = new TelegramPresentation(botService);
 const dbConnectionHelper = new DbConnectionHelper();
 
 (async () => {

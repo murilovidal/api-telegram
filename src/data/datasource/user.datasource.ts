@@ -49,7 +49,7 @@ export class UserDatasource {
     }
   }
 
-  async getAll(): Promise<User[]> {
+  public async getAll(): Promise<User[]> {
     const repository = getRepository(User);
 
     let users = await repository.find({ where: { isActive: true } });
@@ -60,7 +60,7 @@ export class UserDatasource {
     }
   }
 
-  async deleteUser(user: User): Promise<UpdateResult> {
+  public async deleteUser(user: User): Promise<UpdateResult> {
     const repository = getRepository(User);
 
     return await repository.update(user.telegramId, { isActive: false });
