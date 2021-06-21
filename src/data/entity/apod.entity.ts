@@ -5,9 +5,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  Index,
 } from "typeorm";
 
 @Entity()
+@Index(["title", "url"], { unique: true })
 export class Apod {
   @PrimaryGeneratedColumn()
   id!: number;

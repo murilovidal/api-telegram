@@ -1,6 +1,7 @@
 import { getConnection, getRepository } from "typeorm";
 import { Apod } from "../entity/apod.entity";
 import { EnvService } from "../../service/env-service";
+import { resolve } from "url";
 const axios = require("axios");
 
 export class ApodDatasource {
@@ -16,8 +17,12 @@ export class ApodDatasource {
 
   public async setApod(apod: Apod): Promise<Apod> {
     const repository = getRepository(Apod);
-
-    return repository.save(apod);
+    try {
+      repository.save(apod);
+      return apod;
+    } catch (error) {
+      return apod;
+    }
   }
 
   public async getApod(): Promise<Apod> {

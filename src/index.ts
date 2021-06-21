@@ -2,9 +2,8 @@ import { getConnection } from "typeorm";
 import { BotService } from "./service/bot.service";
 import { EnvService } from "./service/env-service";
 import { TelegramPresentation } from "./web/telegram-presentation";
-import dotenv from "dotenv";
 import { DbConnectionHelper } from "./helper/db-connection-helper";
-dotenv.config();
+import { GetApodCronjob } from "./cronjob/get-apod-cronjob";
 
 const envService = new EnvService();
 const telegramPresentation = new TelegramPresentation(
@@ -18,4 +17,5 @@ const dbConnectionHelper = new DbConnectionHelper();
   await connection.synchronize();
   telegramPresentation.startBot();
   console.log("Bot started");
+  const getApodCronjob = new GetApodCronjob();
 })();
